@@ -2,3 +2,20 @@
 # tasks file for ansible_role_flatpak
 - name: Include variables
   ansible.builtin.include_tasks: tasks/include_vars.yml
+
+- name: Install flatpak and xdg desktop portal packages
+  tags: flatpak,package
+  ansible.builtin.package:
+    name: "{{ flatpak_packages }}"
+    state: present
+  when: install_flatpak
+
+- name: Remove flatpak and xdg desktop portal packages
+  tags: flatpak,package
+  ansible.builtin.package:
+    name: "{{ flatpak_packages }}"
+    state: absent
+  when: not install_flatpak
+
+- name: Configure flatpak remotes
+  ansible.builtin.include_tasks: tasks/configure_flatpak_remotes.yml

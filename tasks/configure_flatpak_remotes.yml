@@ -1,0 +1,37 @@
+---
+# tasks file for ansible_role_flatpak
+- name: Add Flathub repository remote to the system installation
+  tags: flatpak,repository
+  community.general.flatpak_remote:
+    name: "{{ flathub_remote_name }}"
+    state: present
+    flatpakrepo_url: "{{ flathub_remote_repository_url }}"
+  when: install_flatpak
+
+- name: Remove Flathub repository remote from the system installation
+  tags: flatpak,repository
+  community.general.flatpak_remote:
+    name: "{{ flathub_remote_name }}"
+    state: absent
+    flatpakrepo_url: "{{ flathub_remote_repository_url }}"
+  when: not install_flatpak
+
+- name: Add Flathub repository remote to the user installation
+  tags: flatpak,repository,user
+  become: false
+  community.general.flatpak_remote:
+    name: "{{ flathub_remote_name }}"
+    state: present
+    flatpakrepo_url: "{{ flathub_remote_repository_url }}"
+    method: user
+  when: install_flatpak
+
+- name: Remove Flathub repository remote from the user installation
+  tags: flatpak,repository,user
+  become: false
+  community.general.flatpak_remote:
+    name: "{{ flathub_remote_name }}"
+    state: absent
+    flatpakrepo_url: "{{ flathub_remote_repository_url }}"
+    method: user
+  when: not install_flatpak

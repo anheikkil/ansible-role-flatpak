@@ -1,2 +1,4 @@
 ---
 # vars file for ansible_role_flatpak
+flathub_remote_name: "flathub"
+flathub_remote_repository_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
