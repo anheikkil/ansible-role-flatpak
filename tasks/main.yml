@@ -4,14 +4,16 @@
   ansible.builtin.include_tasks: tasks/include_vars.yml
 
 - name: Install flatpak and xdg desktop portal packages
-  tags: flatpak,package
+  tags: package,flatpak,desktop-portal
+  become: true
   ansible.builtin.package:
     name: "{{ flatpak_packages }}"
     state: present
   when: install_flatpak
 
 - name: Remove flatpak and xdg desktop portal packages
-  tags: flatpak,package
+  tags: package,flatpak,desktop-portal
+  become: true
   ansible.builtin.package:
     name: "{{ flatpak_packages }}"
     state: absent

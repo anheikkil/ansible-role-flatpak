@@ -1,0 +1,5 @@
+---
+# vars file for ansible_role_flatpak
+flatpak_packages:
+  - flatpak
+  - xdg-desktop-portal
