@@ -14,7 +14,7 @@
       tags: package-manager
       ansible.builtin.apt:
         update_cache: true
-      when: ansible_distribution == ["Debian", "Pop!_OS"]
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
 
   tasks:
 
